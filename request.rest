@@ -1,0 +1,29 @@
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJzYXRyaW8iLCJlbWFpbCI6ImVtYWlsQGdtYWlsLmNvbSIsImlhdCI6MTY2Mjg5NTU2NSwiZXhwIjoxNjYyODk1NTgwfQ.Yzm1WP2hW6i2rDk4sJysKKxIeCDfdTzdxrda3xCZQdA
+
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "satrio",
+    "email": "email52@gmail.com",
+    "password": "tes1253",
+    "confPassword": "tes1253"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "email@gmail.com",
+    "password": "tes123"
+}
+
+###
+GET http://localhost:5000/token
+
+###
+DELETE  http://localhost:5000/logout
