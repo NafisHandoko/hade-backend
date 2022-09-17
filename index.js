@@ -1,24 +1,34 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import db from './config/Database.js';
-import router from './routes/index.js';
+require('dotenv').config()
+const express = require('express')
+const designRoutes = require('./routes/design')
+// const userRoutes = require('./routes/user')
+const mongoose = require('mongoose')
+const app = express()
 
-dotenv.config();
+app.use(express.json())
 
-const app = express();
+app.use((req, res, next) => {
+    console.log(req.method, req.path)
+    next()
+})
 
-try {
-  await db.authenticate();
-  console.log('Database Connected....');
-} catch (error) {
-  console.error(error);
-}
+app.get('/', (req, res) => {
+    res.json({ msg: "Sukses!!!" })
+})
 
-app.use(cors({ credential: true, origin: 'http://localhost:3000' }));
-app.use(cookieParser());
-app.use(express.json());
-app.use(router);
+app.get('/tes', (req, res) => {
+    res.json({ msg: "Masuk tes" })
+})
 
-app.listen(5000, () => console.log('Server running at port 5000'));
+app.use('/api/design', designRoutes)
+// app.use('/api/user', userRoutes)
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log('connected to db & listening on port', process.env.PORT)
+        })
+    })
+    .catch((err) => {
+        console.log(err)
+    })
