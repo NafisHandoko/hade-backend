@@ -2,7 +2,46 @@ import Design from '../models/DesignModel.js'
 import mongoose from 'mongoose'
 
 export const getDesigns = async (req, res) => {
-    const allDesigns = await Design.find().sort({ createdAt: -1 });
+    // const allDesigns = await Design.find().sort({ createdAt: -1 });
+    const allDesigns = await Design.aggregate([
+        {
+            $lookup: {
+                from: "design_styles",
+                localField: "design_style",
+                foreignField: "id",
+                pipeline: [{ $project: { style: 1, _id: 0 } }],
+                as: "design_style",
+            },
+        },
+        {
+            $lookup: {
+                from: "design_categories",
+                localField: "design_category",
+                foreignField: "id",
+                pipeline: [{ $project: { category: 1, _id: 0 } }],
+                as: "design_category",
+            },
+        },
+        {
+            $unwind: "$design_style"
+        },
+        {
+            $unwind: "$design_category"
+        },
+        {
+            $addFields: {
+                design_style: "$design_style.style",
+            }
+        },
+        {
+            $addFields: {
+                design_category: "$design_category.category",
+            }
+        },
+        {
+            $sort: {createdAt: -1}
+        }
+    ])
     res.json(allDesigns)
 }
 
@@ -84,11 +123,3 @@ export const deleteDesign = async (req, res) => {
     }
     res.status(200).json(deletedDesign)
 }
-
-// module.exports = {
-//     getDesigns,
-//     getDesign,
-//     postDesign,
-//     updateDesign,
-//     deleteDesign
-// }

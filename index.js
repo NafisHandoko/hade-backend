@@ -7,18 +7,14 @@ dotenv.config();
 const app = express()
 
 app.use(express.json())
-
+app.use(cors({ credential: true, origin: '*' }));
 app.use((req, res, next) => {
     console.log(req.method, req.path)
     next()
 })
 
 app.get('/', (req, res) => {
-    res.json({ msg: "Sukses!!!" })
-})
-
-app.get('/tes', (req, res) => {
-    res.json({ msg: "Masuk tes" })
+    res.json({ msg: "Endpoint works!!!" })
 })
 
 app.use('/api/design', designRoutes)

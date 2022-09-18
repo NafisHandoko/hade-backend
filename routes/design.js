@@ -11,5 +11,4 @@ router.post('/', postDesign)
 router.patch('/:id', updateDesign)
 router.delete('/:id', deleteDesign)
 
-// module.exports = router
 export default router
