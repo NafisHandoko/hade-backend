@@ -1,11 +1,11 @@
-const Design = require('../models/DesignModel')
+import Design from '../models/DesignModel.js'
 
-const getDesigns = async (req, res) => {
+export const getDesigns = async (req, res) => {
     const allDesigns = await Design.find().sort({createdAt: -1});
     res.json(allDesigns)
 }
 
-const getDesign = async (req, res) => {
+export const getDesign = async (req, res) => {
     const { id } = req.params
     const design = await Design.findById(id)
     if(!design){
@@ -14,7 +14,7 @@ const getDesign = async (req, res) => {
     res.status(200).json(design)
 }
 
-const postDesign = async (req, res) => {
+export const postDesign = async (req, res) => {
     const {nama, harga, dimensi_lahan, luas_lahan, luas_bangunan} = req.body
     try{
         const designRes = await Design.create({nama, harga, dimensi_lahan, luas_lahan, luas_bangunan})
@@ -25,7 +25,7 @@ const postDesign = async (req, res) => {
     }
 }
 
-const updateDesign = async (req, res) => {
+export const updateDesign = async (req, res) => {
     const { id } = req.params
     const updatedDesign = await Design.findByIdAndUpdate(id, req.body)
     if(!updatedDesign){
@@ -34,7 +34,7 @@ const updateDesign = async (req, res) => {
     res.status(200).json(updatedDesign)
 }
 
-const deleteDesign = async (req, res) => {
+export const deleteDesign = async (req, res) => {
     const { id } = req.params
     const deletedDesign = await Design.findByIdAndDelete(id)
     if(!deletedDesign){
@@ -43,10 +43,10 @@ const deleteDesign = async (req, res) => {
     res.status(200).json(deletedDesign)
 }
 
-module.exports = {
-    getDesigns,
-    getDesign,
-    postDesign,
-    updateDesign,
-    deleteDesign
-}
+// module.exports = {
+//     getDesigns,
+//     getDesign,
+//     postDesign,
+//     updateDesign,
+//     deleteDesign
+// }

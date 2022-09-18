@@ -1,8 +1,9 @@
-require('dotenv').config()
-const express = require('express')
-const designRoutes = require('./routes/design')
-// const userRoutes = require('./routes/user')
-const mongoose = require('mongoose')
+import dotenv from 'dotenv'
+import express from 'express'
+import cors from 'cors';
+import mongoose from 'mongoose'
+import designRoutes from './routes/design.js'
+dotenv.config();
 const app = express()
 
 app.use(express.json())

@@ -1,6 +1,8 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
-const { getDesigns, getDesign, postDesign, updateDesign, deleteDesign } = require('../controllers/c_quote')
+import {
+    getDesigns, getDesign, postDesign, updateDesign, deleteDesign 
+} from '../controllers/DesignController.js'
 
 
 router.get('/', getDesigns)
@@ -9,4 +11,5 @@ router.post('/', postDesign)
 router.patch('/:id', updateDesign)
 router.delete('/:id', deleteDesign)
 
-module.exports = router
+// module.exports = router
+export default router
