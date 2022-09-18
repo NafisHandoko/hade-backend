@@ -15,9 +15,9 @@ export const getDesign = async (req, res) => {
 }
 
 export const postDesign = async (req, res) => {
-    const {nama, harga, dimensi_lahan, luas_lahan, luas_bangunan} = req.body
+    const {name, price, land_dimension, land_area, building_area, design_style, design_category} = req.body
     try{
-        const designRes = await Design.create({nama, harga, dimensi_lahan, luas_lahan, luas_bangunan})
+        const designRes = await Design.create({name, price, land_dimension, land_area, building_area, rating:0, design_style, design_category})
         res.status(200).json(designRes)
     }catch(err){
         console.log(err)

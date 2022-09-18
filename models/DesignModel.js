@@ -2,23 +2,35 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const designSchema = Schema({
-    nama: {
+    name: {
         type: String,
         required: true
     },
-    harga: {
+    price: {
         type: Number,
         required: true
     },
-    dimensi_lahan: {
+    land_dimension: {
         type: String,
         required: true
     },
-    luas_lahan: {
+    land_area: {
         type: Number,
         required: true
     },
-    luas_bangunan: {
+    building_area: {
+        type: Number,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true
+    },
+    design_style: {
+        type: Number,
+        required: true
+    },
+    design_category: {
         type: Number,
         required: true
     }
