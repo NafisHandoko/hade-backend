@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Users from '../models/UserModel.js';
+import Users from '../models/UserModel2.js';
 
 const refreshToken = async (req, res) => {
   try {
