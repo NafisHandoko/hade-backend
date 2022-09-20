@@ -5,10 +5,39 @@ const { DataTypes } = Sequelize;
 
 const Users = db.define('users', {
   // field
-  name: DataTypes.STRING,
-  email: DataTypes.STRING,
-  password: DataTypes.STRING,
-  refresh_token: DataTypes.TEXT,
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      len: [3, 100],
+    },
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isEmail: true,
+    },
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  refresh_token: {
+    type: DataTypes.TEXT,
+  },
+  role: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
 }, {
   // opsi untuk nama tabel tunggal
   freezeTableName: true,
