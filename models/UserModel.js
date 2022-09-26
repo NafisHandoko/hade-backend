@@ -31,8 +31,14 @@ const Users = db.define('users', {
   refresh_token: {
     type: DataTypes.TEXT,
   },
+  // untuk verifikasi
+  isVerified: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
   role: {
     type: DataTypes.TEXT,
+    defaultValue: 'customer',
     allowNull: false,
     validate: {
       notEmpty: true,
